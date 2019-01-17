@@ -2,7 +2,6 @@
  *
  * tinytx4 adapter
  *
- *
  *  file io-package.json comments:
  *
  *  {
