@@ -31,7 +31,7 @@
 /* jshint -W097 */// jshint strict:false
 /*jslint node: true */
 'use strict';
-//test
+
 // you have to require the utils module and call adapter function
 const utils = require('@iobroker/adapter-core'); // Get common adapter utils
 
