@@ -1,6 +1,6 @@
 ![Logo](admin/tinytx4.png)
 
-https://travis-ci.org/PericNikola/ioBroker.tinytx4.svg?branch=master
+[![Build Status](https://travis-ci.org/PericNikola/ioBroker.tinytx4.svg?branch=master)](https://travis-ci.org/PericNikola/ioBroker.tinytx4)
 
 # ioBroker.tinytx4
 =================
