@@ -373,8 +373,8 @@ gulp.task('updatePackages', function (done) {
 
 gulp.task('rename', function ()  {
     var newname;
-    var author = '@@Author@@';
-    var email  = '@@email@@';
+    var author = 'Peric Nikola';
+    var email  = 'peric.nikola@ggs.ch';
     for (var a = 0; a < process.argv.length; a++) {
         if (process.argv[a] === '--name') {
             newname = process.argv[a + 1]
@@ -388,7 +388,7 @@ gulp.task('rename', function ()  {
 
     console.log('Try to rename to "' + newname + '"');
     if (!newname) {
-        console.log('Please write the new template name, like: "gulp rename --name mywidgetset" --author "Author Name"');
+        console.log('Please write the new tinytx4 name, like: "gulp rename --name mywidgetset" --author "Author Name"');
         process.exit();
     }
     if (newname.indexOf(' ') !== -1) {
@@ -399,37 +399,37 @@ gulp.task('rename', function ()  {
         console.log('Name must be lower case.');
         process.exit();
     }
-    if (fs.existsSync(__dirname + '/admin/template.png')) {
-        fs.renameSync(__dirname + '/admin/template.png',              __dirname + '/admin/' + newname + '.png');
+    if (fs.existsSync(__dirname + '/admin/tinytx4.png')) {
+        fs.renameSync(__dirname + '/admin/tinytx4.png',              __dirname + '/admin/' + newname + '.png');
     }
-    if (fs.existsSync(__dirname + '/widgets/template.html')) {
-        fs.renameSync(__dirname + '/widgets/template.html',           __dirname + '/widgets/' + newname + '.html');
+    if (fs.existsSync(__dirname + '/widgets/tinytx4.html')) {
+        fs.renameSync(__dirname + '/widgets/tinytx4.html',           __dirname + '/widgets/' + newname + '.html');
     }
-    if (fs.existsSync(__dirname + '/widgets/template/js/template.js')) {
-        fs.renameSync(__dirname + '/widgets/template/js/template.js', __dirname + '/widgets/template/js/' + newname + '.js');
+    if (fs.existsSync(__dirname + '/widgets/tinytx4/js/tinytx4.js')) {
+        fs.renameSync(__dirname + '/widgets/tinytx4/js/tinytx4.js', __dirname + '/widgets/tinytx4/js/' + newname + '.js');
     }
-    if (fs.existsSync(__dirname + '/widgets/template')) {
-        fs.renameSync(__dirname + '/widgets/template',                __dirname + '/widgets/' + newname);
+    if (fs.existsSync(__dirname + '/widgets/tinytx4')) {
+        fs.renameSync(__dirname + '/widgets/tinytx4',                __dirname + '/widgets/' + newname);
     }
     var patterns = [
         {
-            match: /ioBroker template Adapter/g,
+            match: /tinytx4/g,
             replacement: newname
         },
         {
-            match: /template/g,
+            match: /tinytx4/g,
             replacement: newname
         },
         {
-            match: /Template/g,
-            replacement: newname ? (newname[0].toUpperCase() + newname.substring(1)) : 'Template'
+            match: /Tinytx4/g,
+            replacement: newname ? (newname[0].toUpperCase() + newname.substring(1)) : 'Tinytx4'
         },
         {
-            match: /@@Author@@/g,
+            match: /Peric Nikola/g,
             replacement: author
         },
         {
-            match: /@@email@@/g,
+            match: /peric.nikola@ggs.ch/g,
             replacement: email
         }
     ];
