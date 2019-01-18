@@ -15,14 +15,6 @@ on raspberry it might help to use:
  ```
  because serialport package must be built on unsupported arm-hw 
 
-### the actual development version from github (when under testing, may not work!)
-```javascript
-npm install https://github.com/PericNikola/ioBroker.tinytx4/tarball/master --production
-```
-or
-```javascript
-npm install --unsafe-perm https://github.com/PericNikola/ioBroker.tinytx4/tarball/master --production
-```
 ## Settings:
 - Serial port of tinytx4 Adapter usually /dev/ttyAMA0
 - Serial Speed usually 9600 Baud
@@ -44,7 +36,7 @@ to be done in admin
 ## Changelog:
 
 ### 0.0.1
-* working with 1 sensors 
+* working with 1 Sensors without Jeelink
 
 ## License
 The MIT License (MIT)
