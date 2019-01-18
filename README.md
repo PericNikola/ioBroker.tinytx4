@@ -36,7 +36,7 @@ to be done in admin
 ## Changelog:
 
 ### 0.0.1
-* working with 1 sensors 
+* working with 1 Sensors without Jeelink
 
 ## License
 The MIT License (MIT)
