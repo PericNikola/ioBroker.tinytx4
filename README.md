@@ -38,7 +38,7 @@ to be done in admin
 ## Sensors
 |Object|device variants|telegram example|Description|
 |--------|-------|:-:|--------|
-| TinyTX Wireless Sensor | TinyTX Wireless Sensor | ID 21 ... | sensor with RFM12B for Temperatur and Humidity |
+|TinyTX Wireless Sensor|TinyTX Wireless Sensor|ID 21 ...|sensor with RFM12B for Temperatur and Humidity|
 
 
 ## Changelog:
