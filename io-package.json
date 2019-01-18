@@ -7,12 +7,12 @@
                 "de": "Initiale Version"
             }
         },
-		"title": "Javascript/Node.js based tinytx4",
+		"title": "Tinytx4",
         "titleLang": {
-            "de": "Javascript / Node.js basierte Vorlagenadapter"
+            "de": "Tinytx-Adapter"
         },
         "desc": {
-            "de": "ioBroker Tinytx4"
+            "de": "Einlesen der 433/868Mhz TinyTx Sensoren"
         },
         "authors": [
             "Peric Nikola <peric.nikola@ggs.ch>"
@@ -36,11 +36,72 @@
         "restartAdapters": ["vis"]
     },
     "native": {
-        "test1": true,
-        "test2": 42,
-        "mySelect": "auto"
+        "serialport": "/dev/ttyAMA0",
+        "baudrate": 9600,
+        "command": "",
+        "command_en": false,
+        "sensors": [
+                {
+                "sid": "1",
+                "usid": "1",
+                "stype": "tinytx4",
+                "name": "Wohnzimmer"
+            },
+			{
+                "sid": "2",
+                "usid": "2",
+                "stype": "tinytx4",
+                "name": "Schlafzimmer"
+            },
+			{
+                "sid": "3",
+                "usid": "3",
+                "stype": "tinytx4",
+                "name": "Kinderzimmer 1"
+            },
+			{
+                "sid": "4",
+                "usid": "4",
+                "stype": "tinytx4",
+                "name": "Kinderzimmer 2"
+            },
+			{
+                "sid": "5",
+                "usid": "5",
+                "stype": "tinytx4",
+                "name": "Badzimmer"
+            },
+			{
+                "sid": "6",
+                "usid": "6",
+                "stype": "tinytx4",
+                "name": "Aussen"
+            }
+        ]
     },
-    "objects": [
-
+    "objects": [],
+    "instanceObjects": [
+        {
+            "_id": "foundDevices",
+            "type": "channel",
+            "common": {
+                "name": "foundDevices",
+                "role": "device"
+            },
+            "native": {}
+        },
+        {
+            "_id": "foundDevices.state",
+            "type": "state",
+            "common": {
+                "name": "new Devices",
+                "type": "array",
+                "role": "list",
+                "read": true,
+                "write": true,
+                "desc": "new Devices"
+            },
+            "native": {}
+        }
     ]
 }
