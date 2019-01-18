@@ -1,5 +1,5 @@
 ![Logo](admin/tinytx4.png)
-# ioBroker.tinytx
+# ioBroker.tinytx4
 [![Build Status](https://travis-ci.org/PericNikola/ioBroker.tinytx4.svg?branch=master)](https://travis-ci.org/PericNikola/ioBroker.tinytx4)
 
 This is an adapter for ioBroker to integrate RFM12B/RFM69 via Attiny Chip.
@@ -7,24 +7,24 @@ This is an adapter for ioBroker to integrate RFM12B/RFM69 via Attiny Chip.
 ## Installation:
 ### released version
 ```javascript
-npm install iobroker.tinytx
+npm install iobroker.tinytx4
 ```
 on raspberry it might help to use:
 ```javascript
- npm install --unsafe-perm iobroker.tinytx
+ npm install --unsafe-perm iobroker.tinytx4
  ```
  because serialport package must be built on unsupported arm-hw 
 
 ### the actual development version from github (when under testing, may not work!)
 ```javascript
-npm install https://github.com/PericNikola/ioBroker.tinytx/tarball/master --production
+npm install https://github.com/PericNikola/ioBroker.tinytx4/tarball/master --production
 ```
 or
 ```javascript
-npm install --unsafe-perm https://github.com/PericNikola/ioBroker.tinytx/tarball/master --production
+npm install --unsafe-perm https://github.com/PericNikola/ioBroker.tinytx4/tarball/master --production
 ```
 ## Settings:
-- Serial port of TinyTX Adapter usually /dev/ttyAMA0
+- Serial port of tinytx4 Adapter usually /dev/ttyAMA0
 - Serial Speed usually 9600 Baud
 
 ## Configuration:
@@ -38,7 +38,7 @@ to be done in admin
 ## Sensors
 |Object|Device variants|Telegram example|Description|
 |--------|-------|:-:|--------|
-|TinyTX Wireless Sensor|TinyTX Wireless Sensor|ID 21 ...|Sensor with RFM12B for Temperatur and Humidity|
+|Tinytx4 Wireless Sensor|Tinytx4 Wireless Sensor|ID 21 ...|Sensor with RFM12B for Temperatur and Humidity|
 
 
 ## Changelog:
