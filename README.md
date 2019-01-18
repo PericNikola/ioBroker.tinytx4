@@ -1,81 +1,52 @@
 ![Logo](admin/tinytx4.png)
-
+# ioBroker.tinytx
 [![Build Status](https://travis-ci.org/PericNikola/ioBroker.tinytx4.svg?branch=master)](https://travis-ci.org/PericNikola/ioBroker.tinytx4)
 
-# ioBroker.tinytx4
-=================
+This is an adapter for ioBroker to integrate RFM12B/RFM69 via Attiny Chip.
 
-This adapter is a tinytx4 for the creation of an ioBroker adapter. You do not need it unless you plan on developing your own adapter.
+## Installation:
+### released version
+```javascript
+npm install iobroker.tinytx
+```
+on raspberry it might help to use:
+```javascript
+ npm install --unsafe-perm iobroker.tinytx
+ ```
+ because serialport package must be built on unsupported arm-hw 
 
-It includes both code running within iobroker and as vis widget. If you only plan to create a vis widget then you should use the [iobroker.vis-tinytx4](https://github.com/ioBroker/ioBroker.vis-tinytx4) instead.
+### the actual development version from github (when under testing, may not work!)
+```javascript
+npm install https://github.com/PericNikola/ioBroker.tinytx/tarball/master --production
+```
+or
+```javascript
+npm install --unsafe-perm https://github.com/PericNikola/ioBroker.tinytx/tarball/master --production
+```
+## Settings:
+- Serial port of TinyTX Adapter usually /dev/ttyAMA0
+- Serial Speed usually 9600 Baud
 
-## Steps 
-1. download and unpack this packet from github ```https://github.com/ioBroker/ioBroker.tinytx4/archive/master.zip```
-  or clone git repository ```git clone --depth=1 https://github.com/ioBroker/ioBroker.tinytx4.git```
+## Configuration:
+to be done in admin
+* deinition of the Serial port
+* setting the baudrate
+- define sensor address which is received on air
+- define unique sensors address within adapter 
+- define the room
 
-2. download required npm packets. Write in ioBroker.tinytx4 directory:
+## Sensors
+|Object|device variants|telegram example|Description|
+|--------|-------|:-:|--------|
 
-  ```npm install```
-  
-3. set name of this tinytx4. Call
-  
-  ```gulp rename --name mynewname --email email@mail.com --author "Author Name"```
-  
-  *mynewname* must be **lower** case and with no spaces.
+| TinyTX Wireless Sensor | TinyTX Wireless Sensor | ID 21 ... | sensor with RFM12B for Temperatur and Humidity |
 
-  If gulp is not available, install gulp globally:
-  
-  ```npm install -g gulp-cli```
- 
-4. rename directory from *ioBroker.tinytx4* (can be *ioBroker.tinytx4-master*) to *iobroker.mynewname*
 
-5. to use this tinytx4 you should copy it into *.../iobroker/node_modules* directory and then create an instance for it with iobroker.admin
+## Changelog:
 
-6. create your adapter:
 
-  * you might want to start with main.js (code running within iobroker) and admin/index.html (the adapter settings page).
-
-  * [Adapter-Development-Documentation](https://github.com/ioBroker/ioBroker/wiki/Adapter-Development-Documentation),
-  
-  * [Installation, setup and first steps with an ioBroker Development Environment](https://github.com/ioBroker/ioBroker/wiki/Installation,-setup-and-first-steps-with-an-ioBroker-Development-Environment)
-  
-  * [Write and debug vis widgets](https://github.com/ioBroker/ioBroker/wiki/How-to-debug-vis-and-to-write-own-widget-set)
-  
-  * files under the www folders are made available under http://&lt;iobrokerIP&gt;:8082/&lt;adapter-name&gt;/
-    * for this to work the iobroker.vis adapter has to be installed
-    * delete this folder if you do not plan to export any files this way
-    * call ```iobroker upload <adapter-name>``` after you change files in the www folder to get the new files uploaded to vis
-  * the widget folder contains an example of a vis widget
-    * you might want to start with *widget/<adapter-name>.html* and *widget/js/<adapter-name>.js*
-    * call ```iobroker visdebug <adapter-name>``` to enable debugging and upload widget to "vis". (This works only from V0.7.15 of js-controller)
-    * If you do not plan to export any widget then delete the whole widget folder and remove the ```"restartAdapters": ["vis"]``` statement from *io-package.json*
-    * After admin/index.html is changed you must execute ```iobroker upload mynewname``` to see changes in admin console. The same is valid for any files in *admin* and *www* directory  
-
-7. change version: edit package.json and then call ```grunt p``` in your adapter directory.
-  
-8. share it with the community
-
-## Requirements
-* your github repository must have name "ioBroker.<adaptername>". **B** is capital in "ioBroker", but in the package.json the *name* must be low case, because npm does not allow upper case letters.
-* *title* in io-package.json (common) is simple short name of adapter in english. *titleLang* is object that consist short names in many languages. *Lang* ist not german Länge, but english LANGuages.
-* Do not use in the title the words "ioBroker" or "Adapter". It is clear anyway, that it is adapter for ioBroker.   
-
-## Changelog
-
-### 0.7.0 (2019.01.08)
-* (jogibear998) compact mode and fixes
-
-### 0.6.0 (2017.01.02)
-* (bluefox) Support of admin3
-
-### 0.5.0
-* (vegetto) include vis widget
-
-### 0.4.0
-* (bluefox) fix errors with grunt
-
-### 0.2.0
-* (bluefox) initial release
+### 0.0.1
+* working with 1 sensors 
 
 ## License
 The MIT License (MIT)
