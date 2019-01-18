@@ -1,128 +1,169 @@
 <html>
-<head>
-<!-- these 4 files always have to be included -->
-<link rel="stylesheet" type="text/css" href="../../lib/css/materialize.css">
-<link rel="stylesheet" type="text/css" href="../../css/adapter.css"/>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../../css/adapter.css"/>
+        <link rel="stylesheet" type="text/css" href="../../lib/css/materialize.css">
 
-<script type="text/javascript" src="../../lib/js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="../../socket.io/socket.io.js"></script>
+        <script type="text/javascript" src="../../lib/js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="../../socket.io/socket.io.js"></script>
 
-<!-- these files always have to be included -->
-<script type="text/javascript" src="../../js/translate.js"></script>
-<script type="text/javascript" src="../../lib/js/materialize.js"></script>
-<script type="text/javascript" src="../../js/adapter-settings.js"></script>
-<script type="text/javascript" src="words.js"></script>
- <style>
-  .m .col .select-wrapper+label {
-   top: -26px;  
-  }
-     .m span{
-         font-size: 0.9em;
-     }
- </style>
-<!-- you have to define 2 functions in the global scope: -->
-<script type="text/javascript">
+        <script type="text/javascript" src="../../js/translate.js"></script>
+        <script type="text/javascript" src="../../lib/js/materialize.js"></script>
+        <script type="text/javascript" src="../../js/adapter-settings.js"></script>
+        <script type="text/javascript" src="words.js"></script>
 
-    // the function loadSettings has to exist ...
-    function load(settings, onChange) {
-        // example: select elements with id=key and class=value and insert value
-       if (!settings) return;
-        $('.value').each(function () {            
-            var $key = $(this);
-            var id = $key.attr('id');
-            if ($key.attr('type') === 'checkbox') {
-		        // do not call onChange direct, because onChange could expect some arguments
-                $key.prop('checked', settings[id]).on('change', function() {
+        <script type="text/javascript">
+            
+            var sensors = [];
+            var sensorTypes = [
+                'tinytx4'
+                ];
+
+        function setValue(id, value, onChange) {
+            var $value = $('#' + id + '.value');
+
+            if ($value.attr('type') === 'checkbox') {
+                $value.prop('checked', value).change(function () {
                     onChange();
                 });
             } else {
-		        // do not call onChange direct, because onChange could expect some arguments
-                $key.val(settings[id]).on('change', function() {
+                $value.val(value).on('change', function () {
                     onChange();
-                }).on('keyup', function() {
+                }).on('keyup', function () {
                     onChange();
                 });
             }
-        });
-        onChange(false);
-        M.updateTextFields();  // function Materialize.updateTextFields(); to reinitialize all the Materialize labels on the page if you are dynamically adding inputs.
-    }
+        }
 
-    // ... and the function save has to exist.
-    // you have to make sure the callback is called with the settings object as first param!
-    function save(callback) {
-        // example: select elements with class=value and build settings object
-        var obj = {};
-        $('.value').each(function () {
-            var $this = $(this);
-            if ($this.attr('type') === 'checkbox') {
-                obj[$this.attr('id')] = $this.prop('checked');
-            } else {
-                obj[$this.attr('id')] = $this.val();
+        // the function loadSettings has to exist ...
+        function load(settings, onChange) {
+            if (!settings) return;
+            sensors = settings.sensors || [];
+
+            for (var key in settings) {
+                if (!settings.hasOwnProperty(key)) continue;
+                setValue(key, settings[key], onChange);
             }
-        });
-        callback(obj);
-    }
-</script>
-</head>
+            values2table('values', sensors, onChange);
+            
+            //add button
+            $('#table-button-search').click(function () {
+                getIsAdapterAlive(function (isAlive) {
+                    if (isAlive) {
+                        console.log('send browse to adapter');
+                        var changed = true;
+                        sensors.push({
+                            sid: 'new',
+                            stype: 'tinytx4',
+                            usid: 'new',
+                            name: 'not really found :-)'
+                        });
+
+                        if (changed) {
+                            console.log('sensors now ' + JSON.stringify(sensors));
+                            onChange();
+                            values2table('values', sensors, onChange);
+                        }
+                    } else {
+                        showMessage(_('Start or enable adapter first'));
+                    }
+                });
+            }).attr('title', _('update adapter information'));
+
+            // Signal to admin, that no changes yet
+            onChange(false);
+
+        }
+        // ... and the function save has to exist.
+        // you have to make sure the callback is called with the settings object as first param!
+        function save(callback) {
+            // example: select elements with class=value and build settings object
+            var obj = {};
+            $('.value').each(function () {
+                var $this = $(this);
+                if ($this.attr('type') === 'checkbox') {
+                    obj[$this.attr('id')] = $this.prop('checked');
+                } else {
+                    obj[$this.attr('id')] = $this.val();
+                }
+            });
+            // Get edited table
+            obj.sensors = table2values('values');
+            callback(obj);
+        }
+            
+        </script>
+        <style>
+            .sub-title {
+                margin-top: 2rem!important;
+                padding: 0.5rem;
+                background: #64b5f6;
+                color: white;
+            }
+        </style>
+    </head>
 <body>
     <!-- you have to put your config page in a div with id adapter-container -->
     <div class="m adapter-container">
-        <div class="row">
-            <!-- Forms are the standard way to receive user inputted data.
-         Learn more http://materializecss.com/forms.html-->
+        <div class="section">
             <div class="row">
-                <div class="input-field col s6">
-                    <img src="tinytx4.png" class="logo">
+                <div class="col s12 m4 l2">
+                    <img src="tinytx4.png" style="height:7em; width: 7em;" class="logo">
                 </div>
             </div>
-            <div class="row">
-                <div class="input-field col s3">
-                    <input class="value" id="test1" type="checkbox" />
-                    <label for="test1" class="translate">test1</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12 m6 l4">
-                    <input class="value" id="myText" type="text">
-                    <label for="myText">Text</label>
-                    <span class="translate">Descriptions of the input field</span>
-                </div>
-                <div class="input-field col s12 m6 l4">
-                    <input type="number" class="value" id="test2" />
-                    <label for="test2" class="translate">Number</label>
-                    <!-- Important: label must come directly after input. Label is important. -->
-                    <span class="translate">test2</span>
-                </div>
-                <div class="input-field col s12 m6 l4">
-                    <input id="email" type="email" class="value validate">
-                    <label for="email" data-error="wrong" data-success="right">Email</label>
-                    <!--  You can add custom validation messages by adding either data-error or data-success attributes to your input field labels.-->
-                    <span class="translate">Verification input</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12 m4">
-                    <select class="value" id="mySelect">
-                        <option value="auto" class="translate">Auto</option>
-                        <option value="manual" class="translate">Manual</option>
-                    </select>
-                    <label for="mySelect" class="translate">My select</label>
-                    <!-- Important: label must come directly after select. Label is important. -->
-                </div>
-                <div class="input-field col s12 m8">
-                    <i class="material-icons prefix">mode_edit</i>
-                    <textarea id="Textarea" class="value materialize-textarea"></textarea>
-                    <label for="Textarea">Message</label>
-                </div>
-            </div>
+        </div>
+        <div class="section">
             <div class="row">
                 <div class="col s12">
-                    <p class="translate">on save adapter restarts with new config immediately</p>
+                    <h6 class="translate sub-title">Tinytx4 Settings</h6>
+                </div>
+                <div class="col s6">
+                    <input class="value" id="serialport" />
+                    <label for="serialport" class="translate">Serial port</label>
+                    <p>/dev/ttyUSB0 or /dev/ttyACME0</p>
+                    </td>
+                    <!-- Important: label must come directly after input. Label is important. -->
+                </div>
+                <div class="col s6">
+                    <input class="value" id="baudrate" />
+                    <label for="baudrate" class="translate">Baud rate</label>
+                    <p>usually 9600</p>
+                    <!-- Important: label must come directly after input. Label is important. -->
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="row">
+                <div class="col s12">
+                    <h6 class="translate sub-title">Tinytx4 Configuration</h6>
+                    <p class="translate">Valid only TinyTX4 sensor types:</p>
+                </div>
+            </div>
+            <div class="col s12" id="values">
+                <div class="row">
+                    <div class="col s2 m1 l1 center">
+                        <button title="Add device" class="table-button-add btn-floating waves-effect waves-light btn-small">
+                            <i class=" material-icons">add</i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col s12 m12 l12">
+                    <table class="table-values" style="width: 90%;">
+                        <thead>
+                            <tr>
+                                <th data-name="_index" style="width: 40px" class="translate"></th>
+                                <th data-name="sid" style="width: 40px" class="translate">id</th>
+                                <th data-name="stype" style="width: 150px" class="translate" data-options="tinytx4" data-type="select">type</th>
+                                <th data-name="usid" style="width: 50px" class="translate">uid</th>
+                                <th data-name="name" style="width: 200px" class="translate">name</th>
+                                <th data-buttons="delete" style="width: 40px" class="translate">delete</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-lines" id="devices"></tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </body>
-
 </html>
