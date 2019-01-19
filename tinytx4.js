@@ -15,7 +15,6 @@ const adapterName = require('./package.json').name.split('.').pop();
 /*Variable declaration, since ES6 there are let to declare variables. Let has a more clearer definition where 
 it is available then var.The variable is available inside a block and it's childs, but not outside. 
 You can define the same variable name inside a child without produce a conflict with the variable of the parent block.*/
-let variable = 1234;
 
 function write_cmd(command){
 
