@@ -12,7 +12,7 @@
       "email": "peric.nikola@ggs.ch"
     }
   ],
-  "homepage": "https://github.com/ioBroker/ioBroker.tinytx4",
+  "homepage": "https://github.com/PericNikolaioBroker.tinytx4",
   "license": "MIT",
   "keywords": [
     "ioBroker",
@@ -22,7 +22,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ioBroker/ioBroker.tinytx4"
+    "url": "https://github.com/PericNikola/ioBroker.tinytx4"
   },
   "dependencies": {
     "serialport": "^6.2.2"
@@ -37,7 +37,7 @@
     "test": "node node_modules/mocha/bin/mocha --exit"
   },
   "bugs": {
-    "url": "https://github.com/ioBroker/ioBroker.tinytx4/issues"
+    "url": "https://github.com/PericNikola/ioBroker.tinytx4/issues"
   },
   "readmeFilename": "README.md"
 }
