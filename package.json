@@ -25,7 +25,8 @@
     "url": "https://github.com/PericNikola/ioBroker.tinytx4"
   },
   "dependencies": {
-    "serialport": "^6.2.2"
+    "serialport": "^6.2.2",
+    "@iobroker/adapter-core": "^1.0.3"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
