@@ -9,10 +9,10 @@
         },
 		"title": "Tinytx4",
         "titleLang": {
-            "de": "Tinytx-Adapter"
+            "de": "Tinytx4-Adapter"
         },
         "desc": {
-            "de": "Einlesen der 433/868Mhz TinyTx Sensoren"
+            "de": "Einlesen der 433/868Mhz TinyTx4 Sensoren"
         },
         "authors": [
             "Peric Nikola <peric.nikola@ggs.ch>"
