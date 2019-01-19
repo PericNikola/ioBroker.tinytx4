@@ -7,9 +7,7 @@
     "email": "peric.nikola@ggs.ch"
   },
   "contributors": [
-    {
-      "name": "Peric Nikola",
-      "email": "peric.nikola@ggs.ch"
+    {    
     }
   ],
   "homepage": "https://github.com/PericNikola/ioBroker.tinytx4",
