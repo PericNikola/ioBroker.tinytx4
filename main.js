@@ -1,33 +1,3 @@
-/**
- *
- * tinytx4 adapter
- *
- *  file io-package.json comments:
- *
- *  {
- *      "common": {
- *          "name":         "tinytx4",                  // name has to be set and has to be equal to adapters folder name and main file name excluding extension
- *          "version":      "0.0.0",                    // use "Semantic Versioning"! see http://semver.org/
- *          "title":        "Node.js tinytx4 Adapter",  // Adapter title shown in User Interfaces
- *          "authors":  [                               // Array of authord
- *              "name <mail@tinytx4.com>"
- *          ]
- *          "desc":         "tinytx4 adapter",          // Adapter description shown in User Interfaces. Can be a language object {de:"...",ru:"..."} or a string
- *          "platform":     "Javascript/Node.js",       // possible values "javascript", "javascript/Node.js" - more coming
- *          "mode":         "daemon",                   // possible values "daemon", "schedule", "subscribe"
- *          "materialize":  true,                       // support of admin3
- *          "schedule":     "0 0 * * *"                 // cron-style schedule. Only needed if mode=schedule
- *          "loglevel":     "info"                      // Adapters Log Level
- *      },
- *      "native": {                                     // the native object is available via adapter.config in your adapters code - use it for configuration
- *          "test1": true,
- *          "test2": 42,
- *          "mySelect": "auto"
- *      }
- *  }
- *
- */
-
 /* jshint -W097 */// jshint strict:false
 /*jslint node: true */
 'use strict';
@@ -56,9 +26,8 @@ function write_cmd(command){
         adapter.log.debug('message to USB-stick written : ' + command);
     });
 }
-
 function definetinytx(id, name){    
-    adapter.setObjectNotExists('tinytx_' + id, {
+    adapter.setObjectNotExists('tinytx4_' + id, {
         type: 'channel',
         common: {
             name: name,
@@ -68,9 +37,9 @@ function definetinytx(id, name){
             "addr": id
         }
     });
-    adapter.log.info('RFM12B setting up object = tinytx_' + id);
-
-	adapter.setObjectNotExists('tinytx_' + id + '.voltage', {
+    adapter.log.info('RFM12B setting up object = ' + adapterName + '_' + id);
+    
+	adapter.setObjectNotExists(adapterName + '_' + id + '.voltage', {
         type: 'state',
         common: {
             "name":     "Voltage",
@@ -85,7 +54,7 @@ function definetinytx(id, name){
         },
         native: {}
     });
-    adapter.setObjectNotExists('tinytx_' + id + '.temp', {
+    adapter.setObjectNotExists(adapterName + '_' + id + '.temp', {
         type: 'state',
         common: {
             "name":     "Temperature",
@@ -100,7 +69,7 @@ function definetinytx(id, name){
         },
         native: {}
     });
-    adapter.setObjectNotExists('tinytx_' + id + '.humid', {
+    adapter.setObjectNotExists(adapterName + '_' + id + '.humid', {
         type: 'state',
         common: {
             "name":     "Humidity",
@@ -144,17 +113,18 @@ function logtinytx(data){
 						
             if (array.length === 0 || array.length !== 1) {
             adapter.log.debug('received ID : ' + SensorID + ' is not defined in the adapter Configuration');
-            }	else if (array[0].stype !==  'tinytx'){
-					adapter.log.debug('received ID : ' + SensorID + ' is not defined in the adapter as tinytx ');
+            }	else if (array[0].stype !==  adapterName){
+					adapter.log.debug('received ID : ' + SensorID + ' is not defined in the adapter as '+ adapterName);
             }	else if (array[0].usid != 'nodef'){
                 						
                 // Werte schreiben
-                adapter.setState('tinytx_'+ array[0].usid +'.humid',    {val: (Feuchtigkeit), ack: true});
-                adapter.setState('tinytx_'+ array[0].usid +'.temp',     {val: (Temperatur), ack: true});
-                adapter.setState('tinytx_'+ array[0].usid +'.voltage',   {val: (BattSpannung), ack: true});                
+                adapter.setState(adapterName + '_' + array[0].usid +'.humid',    {val: (Feuchtigkeit), ack: true});
+                adapter.setState(adapterName + '_' + array[0].usid +'.temp',     {val: (Temperatur), ack: true});
+                adapter.setState(adapterName + '_' + array[0].usid +'.voltage',   {val: (BattSpannung), ack: true});                
             }
      }
 }
+
 
 // create adapter instance wich will be used for communication with controller
 let adapter;
@@ -188,88 +158,78 @@ function startAdapter(options) {
             }
         },
         // Some message was sent to adapter instance over message box. Used by email, pushover, text2speech, ...
-        message: function (obj) {
-            if (typeof obj === 'object' && obj.message) {
-                if (obj.command === 'send') {
+        //message: function (obj) {
+            //if (typeof obj === 'object' && obj.message) {
+               // if (obj.command === 'send') {
                     // e.g. send email or pushover or whatever
-                    console.log('send command');
+                 //   console.log('send command');
         
                     // Send response in callback if required
-                    if (obj.callback) adapter.sendTo(obj.from, obj.command, 'Message received', obj.callback);
-                }
-            }
-        },
+                  //  if (obj.callback) adapter.sendTo(obj.from, obj.command, 'Message received', obj.callback);
+                //}
+           // }
+        //},
         // is called when databases are connected and adapter received configuration.
         // start here!
         ready: () => main()
     });
     // you have to call the adapter function and pass a options object
-    // adapter will be restarted automatically every time as the configuration changed, e.g system.adapter.tinytx4.0
+    // adapter will be restarted automatically every time as the configuration changed, e.g system.adapter.template.0
 	adapter = new utils.Adapter(options);
 
 	return adapter;
 };
 
 function main() {
-
     // The adapters config (in the instance object everything under the attribute "native") is accessible via
     // adapter.config:
-    adapter.log.info('config test1: '    + adapter.config.test1);
-    adapter.log.info('config test1: '    + adapter.config.test2);
-    adapter.log.info('config mySelect: ' + adapter.config.mySelect);
+	adapter.log.debug('start of main');
+    var obj = adapter.config.sensors;
+    for (var anz in obj){
+        if(obj[anz].stype==adapterName){
+            definetinytx(obj[anz].usid, obj[anz].name);
+        }
+    }
 
+    var options = {
+        baudRate:   parseInt(adapter.config.baudrate)   || parseInt(9600)
+    };
+	adapter.log.debug('configured port : ' + adapter.config.serialport );
+	adapter.log.debug('configured baudrate : ' + adapter.config.baudrate );
+	adapter.log.debug('options : ' + JSON.stringify(options) );	
+    	const sp = new SerialPort(adapter.config.serialport || '/dev/ttyUSB0', options, function (error) {
+        if ( error ) {
+            adapter.log.info('failed to open: '+error);
+        } else {
+            adapter.log.info('open');
+	    const parser = sp.pipe(new Readline({ delimiter: '\r\n' }));
 
-    /**
-     *
-     *      For every state in the system there has to be also an object of type state
-     *
-     *      Here a simple tinytx4 for a boolean variable named "testVariable"
-     *
-     *      Because every adapter instance uses its own unique namespace variable names can't collide with other adapters variables
-     *
-     */
+            parser.on('data', function(data) {
 
-    adapter.setObject('testVariable', {
-        type: 'state',
-        common: {
-            name: 'testVariable',
-            type: 'boolean',
-            role: 'indicator'
-        },
-        native: {}
+                //adapter.log.info('data received: ' + data);
+                if ( data.startsWith('H0')){
+                    logHMS100TF(data);
+                }
+                else {
+                    var tmp = data.split(' ');
+				
+                    if(!isNaN(tmp[0])){
+						logtinytx(data);
+					} else {
+						//adapter.log.info('data received 1448: ' + data);	
+					}
+                }
+            });
+	    if (adapter.config.command_en) {
+                setTimeout(write_cmd(adapter.config.command) , 1500); //1,5s Verzögerung
+            }
+        }
     });
 
-    // in this tinytx4 all states changes inside the adapters namespace are subscribed
+
+    // in this template all states changes inside the adapters namespace are subscribed
     adapter.subscribeStates('*');
 
-
-    /**
-     *   setState examples
-     *
-     *   you will notice that each setState will cause the stateChange event to fire (because of above subscribeStates cmd)
-     *
-     */
-
-    // the variable testVariable is set to true as command (ack=false)
-    adapter.setState('testVariable', true);
-
-    // same thing, but the value is flagged "ack"
-    // ack should be always set to true if the value is received from or acknowledged from the target system
-    adapter.setState('testVariable', {val: true, ack: true});
-
-    // same thing, but the state is deleted after 30s (getState will return null afterwards)
-    adapter.setState('testVariable', {val: true, ack: true, expire: 30});
-
-
-
-    // examples for the checkPassword/checkGroup functions
-    adapter.checkPassword('admin', 'iobroker', function (res) {
-        console.log('check user admin pw ioboker: ' + res);
-    });
-
-    adapter.checkGroup('admin', 'admin', function (res) {
-        console.log('check group user admin group admin: ' + res);
-    });
 
 }
 
