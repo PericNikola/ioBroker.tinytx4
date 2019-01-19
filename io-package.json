@@ -29,7 +29,7 @@
         "extIcon": "https://raw.githubusercontent.com/PericNikola/ioBroker.tinytx4/master/admin/tinytx4.png",
         "keywords": ["tinytx4", "meigrafd", "GUI", "nathan", "RFM12B"],
         "readme": "https://github.com/PericNikola/ioBroker.tinytx4/blob/master/README.md",
-        "loglevel": "info",
+        "loglevel": "debug",
         "type": "hardware",
         "license": "MIT",
         "messagebox": false,
