@@ -16,6 +16,16 @@ const adapterName = require('./package.json').name.split('.').pop();
 it is available then var.The variable is available inside a block and it's childs, but not outside. 
 You can define the same variable name inside a child without produce a conflict with the variable of the parent block.*/
 
+function getConfigObjects(Obj, where, what){
+    var foundObjects = [];
+    for (var prop in Obj){
+        if (Obj[prop][where] == what){
+            foundObjects.push(Obj[prop]);
+        }
+    }
+    return foundObjects;
+}
+
 function write_cmd(command){
 
     sp.write(command, function(err) {
