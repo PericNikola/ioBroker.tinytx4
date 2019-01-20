@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/PericNikola/ioBroker.tinytx4.svg?branch=master)](https://travis-ci.org/PericNikola/ioBroker.tinytx4)
 <<<<<<< HEAD
 =======
-[![Downloads](https://img.shields.io/npm/dm/iobroker.tinytx4.svg)](https://www.npmjs.com/package/iobroker.tinytx4)
+
 [![NPM version](https://img.shields.io/npm/v/iobroker.tinytx4.svg)](https://www.npmjs.com/package/iobroker.tinytx4)
 >>>>>>> a19cca41315ecfd5785663b49e82d9113e28459d
 
