@@ -39,7 +39,7 @@ to be done in admin
 ## Changelog:
 
 ### 0.0.2
-* finale Version
+* final Version
 ### 0.0.1
 * working with 1 Sensors without Jeelink
 
