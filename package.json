@@ -7,8 +7,7 @@
     "email": "peric.nikola@ggs.ch"
   },
   "contributors": [
-    {    
-    }
+    {}
   ],
   "homepage": "https://github.com/PericNikola/ioBroker.tinytx4",
   "license": "MIT",
@@ -23,8 +22,8 @@
     "url": "https://github.com/PericNikola/ioBroker.tinytx4"
   },
   "dependencies": {
-    "serialport": "^6.2.2",
-    "@iobroker/adapter-core": "^1.0.3"
+    "@iobroker/adapter-core": "^1.0.3",
+    "serialport": "^6.2.2"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
