@@ -32,7 +32,7 @@ to be done in admin
 ## Sensors
 |Object|Device variants|Telegram example|Description|
 |--------|-------|:-:|--------|
-|Tinytx4 Wireless Sensor|Tinytx4 Wireless Sensor|ID 21 ...|Sensor with RFM12B for Temperatur and Humidity|
+|Tinytx4 Wireless Sensor|Tinytx4 Wireless Sensor|ID 21 ...|Sensor with RFM12B for Temperatur, Humidity and Battery|
 
 
 ## Changelog:
@@ -40,7 +40,7 @@ to be done in admin
 ### 0.0.2
 * final Version
 ### 0.0.1
-* working with 1 Sensors without Jeelink
+* working with 1 Sensors without Jeelink Sketch
 
 ## License
 The MIT License (MIT)
