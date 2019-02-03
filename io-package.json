@@ -1,10 +1,10 @@
 {
     "common": {
         "name": "tinytx4",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "news": {
             "0.0.2": {
-                "de": "Initiale Version"
+                "de": "Finale Version"
             },
             "0.0.1": {
                 "de": "Initiale Version"
