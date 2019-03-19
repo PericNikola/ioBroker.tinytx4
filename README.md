@@ -46,7 +46,7 @@ to be done in admin
 ## License
 The MIT License (MIT)
 
-Copyright (c) 2018 Peric Nikola <tinytx4@tinytx4.com>
+Copyright (c) 2019 Peric Nikola <tinytx4@tinytx4.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
