@@ -24,7 +24,7 @@ on raspberry it might help to use:
 
 ## Configuration:
 to be done in admin
-* deinition of the Serial port
+* definition of the Serial port
 * setting the baudrate
 - define sensor address which is received on air
 - define unique sensors address within adapter 
