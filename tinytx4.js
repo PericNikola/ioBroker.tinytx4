@@ -145,7 +145,7 @@ function startAdapter(options) {
         // is called when adapter shuts down - callback has to be called under any circumstances!
         unload: function (callback) {
             try {
-                //adapter.log.info('cleaned everything up...');
+                ;   //adapter.log.info('cleaned everything up...');
                 callback();
             } catch (e) {
                 callback();
@@ -154,16 +154,16 @@ function startAdapter(options) {
         // is called if a subscribed object changes
         objectChange: function (id, obj) {
             // Warning, obj can be null if it was deleted
-            //adapter.log.info('objectChange ' + id + ' ' + JSON.stringify(obj));
+            ;   ////adapter.log.info('objectChange ' + id + ' ' + JSON.stringify(obj));
         },
         // is called if a subscribed state changes
         stateChange: function (id, state) {
             // Warning, state can be null if it was deleted
-            //adapter.log.info('stateChange ' + id + ' ' + JSON.stringify(state));
+            ;   //adapter.log.info('stateChange ' + id + ' ' + JSON.stringify(state));
         
             // you can use the ack flag to detect if it is status (true) or command (false)
             if (state && !state.ack) {
-               // adapter.log.info('ack is not set!');
+                ;   // adapter.log.info('ack is not set!');
             }
         },
         // Some message was sent to adapter instance over message box. Used by email, pushover, text2speech, ...
@@ -181,7 +181,7 @@ function startAdapter(options) {
         // is called when databases are connected and adapter received configuration.
         // start here!
         ready: function() {
-            //adapter.log.info('entered ready');
+            ;   //adapter.log.info('entered ready');
             main();
         }
     });
@@ -218,7 +218,7 @@ function main() {
 
             parser.on('data', function(data) {
 
-                //adapter.log.info('data received: ' + data);
+                ;   //adapter.log.info('data received: ' + data);
                 if ( data.startsWith('H0')){
                     logHMS100TF(data);
                 }
@@ -228,7 +228,7 @@ function main() {
                     if(!isNaN(tmp[0])){
 						logtinytx(data);
 					} else {
-						//adapter.log.info('data received 1448: ' + data);	
+						;   //adapter.log.info('data received 1448: ' + data);	
 					}
                 }
             });
