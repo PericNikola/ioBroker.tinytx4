@@ -97,7 +97,7 @@ function definetinytx(id, name){
 function logtinytx(data){
     var tmp = data.split(' ');
 	
-	adapter.log.debug('raw Data from Serial Port: ' + data);	//SensorID
+	//adapter.log.debug('raw Data from Serial Port: ' + data);	//SensorID
 	
 	//adapter.log.debug('Sensor ID: ' + tmp[0]);	//SensorID
 	var SensorID = tmp[0];	//SensorID
@@ -121,9 +121,9 @@ function logtinytx(data){
             var array=getConfigObjects(adapter.config.sensors, 'sid' , SensorID);
 						
             if (array.length === 0 || array.length !== 1) {
-            adapter.log.debug('received ID : ' + SensorID + ' is not defined in the adapter Configuration');
+            //adapter.log.debug('received ID : ' + SensorID + ' is not defined in the adapter Configuration');
             }	else if (array[0].stype !==  adapterName){
-					adapter.log.debug('received ID : ' + SensorID + ' is not defined in the adapter as '+ adapterName);
+					//adapter.log.debug('received ID : ' + SensorID + ' is not defined in the adapter as '+ adapterName);
             }	else if (array[0].usid != 'nodef'){
                 						
                 // Werte schreiben
@@ -145,7 +145,7 @@ function startAdapter(options) {
         // is called when adapter shuts down - callback has to be called under any circumstances!
         unload: function (callback) {
             try {
-                adapter.log.info('cleaned everything up...');
+                //adapter.log.info('cleaned everything up...');
                 callback();
             } catch (e) {
                 callback();
@@ -154,16 +154,16 @@ function startAdapter(options) {
         // is called if a subscribed object changes
         objectChange: function (id, obj) {
             // Warning, obj can be null if it was deleted
-            adapter.log.info('objectChange ' + id + ' ' + JSON.stringify(obj));
+            //adapter.log.info('objectChange ' + id + ' ' + JSON.stringify(obj));
         },
         // is called if a subscribed state changes
         stateChange: function (id, state) {
             // Warning, state can be null if it was deleted
-            adapter.log.info('stateChange ' + id + ' ' + JSON.stringify(state));
+            //adapter.log.info('stateChange ' + id + ' ' + JSON.stringify(state));
         
             // you can use the ack flag to detect if it is status (true) or command (false)
             if (state && !state.ack) {
-                adapter.log.info('ack is not set!');
+               // adapter.log.info('ack is not set!');
             }
         },
         // Some message was sent to adapter instance over message box. Used by email, pushover, text2speech, ...
@@ -181,7 +181,7 @@ function startAdapter(options) {
         // is called when databases are connected and adapter received configuration.
         // start here!
         ready: function() {
-            adapter.log.info('entered ready');
+            //adapter.log.info('entered ready');
             main();
         }
     });
