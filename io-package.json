@@ -39,7 +39,7 @@
         "restartAdapters": ["vis"]
     },
     "native": {
-        "serialport": "/dev/ttyAMA0",
+        "serialport": "/dev/serial0",
         "baudrate": 9600,
         "command": "",
         "command_en": false,
