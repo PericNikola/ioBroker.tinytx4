@@ -121,9 +121,9 @@ function logtinytx(data){
             var array=getConfigObjects(adapter.config.sensors, 'sid' , SensorID);
 						
             if (array.length === 0 || array.length !== 1) {
-            //adapter.log.debug('received ID : ' + SensorID + ' is not defined in the adapter Configuration');
+                ;//adapter.log.debug('received ID : ' + SensorID + ' is not defined in the adapter Configuration');
             }	else if (array[0].stype !==  adapterName){
-					//adapter.log.debug('received ID : ' + SensorID + ' is not defined in the adapter as '+ adapterName);
+					;//adapter.log.debug('received ID : ' + SensorID + ' is not defined in the adapter as '+ adapterName);
             }	else if (array[0].usid != 'nodef'){
                 						
                 // Werte schreiben
