@@ -7,7 +7,7 @@
     "email": "peric.nikola@ggs.ch"
   },
   "contributors": [
-    {}
+    {"name": "test"}
   ],
   "homepage": "https://github.com/PericNikola/ioBroker.tinytx4",
   "license": "MIT",
