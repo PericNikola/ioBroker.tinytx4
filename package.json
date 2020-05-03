@@ -26,9 +26,9 @@
     "serialport": "^8.0.7"
   },
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "mocha": "^4.1.0",
-    "chai": "^4.1.2"
+    "gulp": "^4.0.2",
+    "mocha": "^7.1.2",
+    "chai": "^4.2.0"
   },
   "main": "tinytx4.js",
   "scripts": {
