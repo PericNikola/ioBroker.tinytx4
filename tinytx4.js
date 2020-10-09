@@ -97,7 +97,7 @@ function definetinytx(id, name){
 function logtinytx(data){
     var tmp = data.split(' ');
 	
-	adapter.log.debug('raw Data from Serial Port: ' + data);	//SensorID
+	adapter.log.debug('raw Data from Serial Port: ' + data);	 //SensorID
 	
 	//adapter.log.debug('Sensor ID: ' + tmp[0]);	//SensorID
 	var SensorID = tmp[0];	//SensorID
