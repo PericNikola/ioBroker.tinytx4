@@ -38,6 +38,8 @@ to be done in admin
 
 ## Changelog:
 
+### 0.0.3
+* final Version
 ### 0.0.2
 * final Version
 ### 0.0.1
